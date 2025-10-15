@@ -115,15 +115,18 @@ const GameCanvas = ({
           );
         })}
 
-        <div
-          className="absolute text-4xl transition-all duration-100"
+        <img
+          src="https://cdn.poehali.dev/files/918bcd77-9671-4bae-a96d-596d5cfda64d.png"
+          alt="White Lily Cookie"
+          className="absolute transition-all duration-100"
           style={{ 
-            left: playerPos.x - cameraOffset.x, 
-            top: playerPos.y - cameraOffset.y 
+            left: playerPos.x - cameraOffset.x - 10, 
+            top: playerPos.y - cameraOffset.y - 10,
+            width: PLAYER_SIZE + 20,
+            height: PLAYER_SIZE + 20,
+            objectFit: 'contain'
           }}
-        >
-          🌸
-        </div>
+        />
 
         <img
           src="https://cdn.poehali.dev/files/0952eae0-f588-49c6-986a-59692520ea50.png"

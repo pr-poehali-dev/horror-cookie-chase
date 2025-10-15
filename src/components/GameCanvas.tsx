@@ -84,15 +84,45 @@ const GameCanvas = ({
         {obstacles.map(obstacle => {
           const screenX = obstacle.x - cameraOffset.x;
           const screenY = obstacle.y - cameraOffset.y;
-          if (screenX < -60 || screenX > VIEWPORT_WIDTH || screenY < -60 || screenY > VIEWPORT_HEIGHT) return null;
+          if (screenX < -80 || screenX > VIEWPORT_WIDTH || screenY < -80 || screenY > VIEWPORT_HEIGHT) return null;
           
+          const getObstacleImage = () => {
+            if (obstacle.type === 'tree') {
+              return 'https://cdn.poehali.dev/files/69bc9e51-70a8-4af0-b002-2829274f9fc0.jpeg';
+            } else if (obstacle.type === 'bush') {
+              return 'https://cdn.poehali.dev/files/295ea2ce-f1a9-4227-9a4b-fdb96c3f5cc6.jpeg';
+            }
+            return null;
+          };
+
+          const imageUrl = getObstacleImage();
+          
+          if (imageUrl) {
+            return (
+              <img
+                key={obstacle.id}
+                src={imageUrl}
+                alt={obstacle.type}
+                className="absolute opacity-80"
+                style={{ 
+                  left: screenX, 
+                  top: screenY,
+                  width: obstacle.type === 'tree' ? 70 : 60,
+                  height: obstacle.type === 'tree' ? 70 : 60,
+                  objectFit: 'contain',
+                  filter: 'brightness(0.7) contrast(1.2)'
+                }}
+              />
+            );
+          }
+
           return (
             <div
               key={obstacle.id}
               className="absolute text-4xl opacity-70"
               style={{ left: screenX, top: screenY }}
             >
-              {obstacle.type === 'tree' ? '🌲' : obstacle.type === 'bush' ? '🌿' : '🪦'}
+              🪦
             </div>
           );
         })}
